@@ -49,7 +49,8 @@ export const styles = StyleSheet.create({
         borderColor: '#DDD',
         width: '100%',
         marginTop: 10,
-        borderRadius: 8
+        borderRadius: 8,
+        marginBottom: 20
     },
     card_title: {
         fontWeight: 'bold',

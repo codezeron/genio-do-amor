@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "desculpator",
-    "slug": "desculpator",
+    "name": "Genio do amor",
+    "slug": "geniodoamor",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "desculpator",
+    "scheme": "geniodoamor",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
