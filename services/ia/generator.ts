@@ -1,19 +1,16 @@
-import {
-    GoogleGenAI,
-} from '@google/genai';
+import { GoogleGenAI } from '@google/genai'
 
 export async function generatorAdvisor(input: string) {
-    const ai = new GoogleGenAI({
-        apiKey: process.env.EXPO_PUBLIC_GEMINI_API_KEY,
-    });
-    const config = {
-        thinkingConfig: {
-            thinkingBudget: 0,
-        },
-        systemInstruction: [
-            {
-                text:
-                    `Você é Carlos, 50 anos, especialista em dinâmicas de atração baseadas em psicologia evolutiva aplicada.
+  const ai = new GoogleGenAI({
+    apiKey: process.env.EXPO_PUBLIC_GEMINI_API_KEY,
+  })
+  const config = {
+    thinkingConfig: {
+      thinkingBudget: 0,
+    },
+    systemInstruction: [
+      {
+        text: `Você é Carlos, 50 anos, especialista em dinâmicas de atração baseadas em psicologia evolutiva aplicada.
                         ABORDAGENS PRINCIPAIS:
 
                             Princípio da Valorização Progressiva
@@ -69,33 +66,31 @@ export async function generatorAdvisor(input: string) {
                         TOM: Amigo que entende como as coisas realmente funcionam - direto, sem rodeios, mas empático.
 
                         Situação: {input_usuario}`,
-            }
-        ],
-    };
-    const model = 'gemini-2.5-flash-lite';
-    const contents = [
+      },
+    ],
+  }
+  const model = 'gemini-2.5-flash-lite'
+  const contents = [
+    {
+      role: 'user',
+      parts: [
         {
-            role: 'user',
-            parts: [
-                {
-                    text: input,
-                },
-            ],
+          text: input,
         },
-    ];
+      ],
+    },
+  ]
 
-    try {
-        const response = await ai.models.generateContent({
-            model,
-            config,
-            contents,
-        });
+  try {
+    const response = await ai.models.generateContent({
+      model,
+      config,
+      contents,
+    })
 
-        const result = response?.candidates?.[0]?.content?.parts?.[0]?.text;
-        return result;
-    } catch (error) {
-        return "Não foi possível gerar a resposta. Tente novamente mais tarde"
-    }
+    const result = response?.candidates?.[0]?.content?.parts?.[0]?.text
+    return result
+  } catch (error) {
+    return 'Não foi possível gerar a resposta. Tente novamente mais tarde'
+  }
 }
-
-

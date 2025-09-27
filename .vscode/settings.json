@@ -3,5 +3,10 @@
     "source.fixAll": "explicit",
     "source.organizeImports": "explicit",
     "source.sortMembers": "explicit"
-  }
+  },
+  "editor.insertSpaces": false,
+  "editor.detectIndentation": false,
+  "editor.tabSize": 2,
+  "tailwindCSS.classFunctions": ["classNames", "clsx", "cn"],
+  "tailwindCSS.classAttributes": ["class", "className", "ngClass"]
 }
