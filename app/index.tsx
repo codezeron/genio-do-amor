@@ -1,4 +1,4 @@
-import { generatorAdvisor } from '@/services/ia/generator'
+import { useAdviceGenerator } from '@/hooks/use-advice-generator'
 import { styles } from '@/styles'
 import { MotiView } from 'moti'
 import React, { useState } from 'react'
@@ -12,21 +12,19 @@ import {
 } from 'react-native'
 
 export default function Index() {
-  const [advice, setAdvice] = useState('')
-  const [answer, setAnswer] = useState('')
-  const [isLoading, setLoading] = useState(false)
+  const [inputText, setInputText] = useState('')
+
+  const {
+    data: answer,
+    mutateAsync: generateAdvice,
+    isPending: isLoading,
+  } = useAdviceGenerator({
+    onError: () => alert('Erro ao gerar conselho. Tente novamente mais tarde!'),
+  })
 
   const handlePress = async () => {
-    if (advice.length < 5) {
-      alert('Mensagem muito curta!')
-      return
-    }
-
-    setLoading(true)
-    setAnswer('')
-    const result = await generatorAdvisor(advice)
-    setAnswer(result || '...')
-    setLoading(false)
+    await generateAdvice({ inputText })
+    setInputText('')
   }
 
   return (
@@ -37,8 +35,8 @@ export default function Index() {
         Gerador de conselhos amorosos profissional
       </Text>
       <TextInput
-        value={advice}
-        onChangeText={setAdvice}
+        value={inputText}
+        onChangeText={setInputText}
         style={styles.input}
         placeholder="Escreva a pergunta..."
       />
