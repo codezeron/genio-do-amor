@@ -18,7 +18,6 @@ import {
 export default function Index() {
 	const [messages, setMessages] = useState<Message[]>([])
 	const [inputText, setInputText] = useState('')
-	const [isInputFocused, setIsInputFocused] = useState(false)
 
 	const {
 		data: answer,
@@ -44,54 +43,54 @@ export default function Index() {
 			keyboardVerticalOffset={8}
 		>
 			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-				<View className="flex-1 px-4 py-4 ">
+				<View className="flex-1 px-4 py-4 mb-4">
 					{!answer && <View />}
-					<View className="flex w-full items-center gap-6">
-						<GradientText
-							text="Gênio do Amor"
-							className="text-5xl font-bold text-center"
-							colors={['#C084FC', '#F472B6']}
-						/>
-						<Text className="text-xl text-gray-700 text-center">
-							Desperte a magia dos relacionamentos com conselhos sábios do universo
-							do amor
-						</Text>
-					</View>
 
-					<View className="flex-1 mb-4">
-						<FlatList
-							className="w-full flex-grow flex-end"
-							data={messages}
-							keyExtractor={(_, idx) => idx.toString()}
-							renderItem={({ item: message }) => (
-								<MotiView
-									from={{ opacity: 0, translateY: 50 }}
-									animate={{ opacity: 1, translateY: 0 }}
+					<FlatList
+						className="w-full flex-grow"
+						data={messages}
+						keyExtractor={(_, idx) => idx.toString()}
+						renderItem={({ item: message }) => (
+							<MotiView
+								from={{ opacity: 0, translateY: 50 }}
+								animate={{ opacity: 1, translateY: 0 }}
+								className={cn(
+									'border border-gray-300 w-fit rounded-xl my-2 p-3',
+									message.role === 'user'
+										? 'bg-purple-100 self-end'
+										: 'bg-white self-start',
+								)}
+							>
+								<Text
 									className={cn(
-										'border border-gray-300 w-fit rounded-xl my-2 p-3',
-										message.role === 'user'
-											? 'bg-purple-100 self-end'
-											: 'bg-white self-start',
+										'text-purple-700 font-bold mb-1',
+										message.role === 'user' && 'text-right',
 									)}
 								>
-									<Text
-										className={cn(
-											'text-purple-700 font-bold mb-1',
-											message.role === 'user' && 'text-right',
-										)}
-									>
-										{message.role === 'user' ? 'Você:' : 'Gênio:'}
-									</Text>
-									<Text className={cn(message.role === 'user' && 'text-right')}>
-										{message.content}
-									</Text>
-								</MotiView>
-							)}
-							contentContainerStyle={{ paddingBottom: 20 }}
-							keyboardShouldPersistTaps="handled"
-						/>
-					</View>
-
+									{message.role === 'user' ? 'Você:' : 'Gênio:'}
+								</Text>
+								<Text className={cn(message.role === 'user' && 'text-right')}>
+									{message.content}
+								</Text>
+							</MotiView>
+						)}
+						contentContainerStyle={{ paddingBottom: 20 }}
+						keyboardShouldPersistTaps="handled"
+						ListHeaderComponent={
+							<>
+								<GradientText
+									text="Gênio do Amor"
+									className="text-5xl font-bold text-center w-full"
+									numberOfLines={1}
+									colors={['#C084FC', '#F472B6']}
+								/>
+								<Text className="text-xl text-gray-700 text-center">
+									Desperte a magia dos relacionamentos com conselhos sábios do universo
+									do amor
+								</Text>
+							</>
+						}
+					/>
 
 					<View className="flex flex-col gap-2 w-full mb-8">
 						<TextInput
@@ -99,8 +98,6 @@ export default function Index() {
 							onChangeText={setInputText}
 							className="w-full px-4 py-2 rounded-lg border border-gray-300"
 							placeholder="Qual é a sua dúvida amorosa?"
-							onFocus={() => setIsInputFocused(true)}
-							onBlur={() => setIsInputFocused(false)}
 						/>
 						<TouchableOpacity
 							disabled={isLoading || !inputText.trim()}
@@ -114,6 +111,6 @@ export default function Index() {
 					</View>
 				</View>
 			</TouchableWithoutFeedback>
-		</KeyboardAvoidingView>
+		</KeyboardAvoidingView >
 	)
 }
