@@ -8,7 +8,6 @@ import {
 	FlatList,
 	Keyboard,
 	KeyboardAvoidingView,
-	Platform,
 	Text,
 	TextInput,
 	TouchableOpacity,
@@ -19,6 +18,7 @@ import {
 export default function Index() {
 	const [messages, setMessages] = useState<Message[]>([])
 	const [inputText, setInputText] = useState('')
+	const [isInputFocused, setIsInputFocused] = useState(false)
 
 	const {
 		data: answer,
@@ -39,14 +39,14 @@ export default function Index() {
 
 	return (
 		<KeyboardAvoidingView
-			behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+			behavior={'padding'}
 			className="flex-1"
-		// keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}
+			keyboardVerticalOffset={8}
 		>
 			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-				<View className="flex-1 px-4 py-4">
+				<View className="flex-1 px-4 py-4 ">
 					{!answer && <View />}
-					<View className="items-center gap-6 mb-4">
+					<View className="flex w-full items-center gap-6">
 						<GradientText
 							text="Gênio do Amor"
 							className="text-5xl font-bold text-center"
@@ -93,16 +93,18 @@ export default function Index() {
 					</View>
 
 
-					<View className="flex flex-col gap-2 w-full mb-18">
+					<View className="flex flex-col gap-2 w-full mb-8">
 						<TextInput
 							value={inputText}
 							onChangeText={setInputText}
 							className="w-full px-4 py-2 rounded-lg border border-gray-300"
 							placeholder="Qual é a sua dúvida amorosa?"
+							onFocus={() => setIsInputFocused(true)}
+							onBlur={() => setIsInputFocused(false)}
 						/>
 						<TouchableOpacity
 							disabled={isLoading || !inputText.trim()}
-							className="mt-2 p-2 w-full rounded-md flex items-center justify-center bg-purple-500 disabled:opacity-50"
+							className="p-2 w-full rounded-md flex items-center justify-center bg-purple-500 disabled:opacity-50"
 							onPress={handleSubmit}
 						>
 							<Text className="text-white font-bold text-lg">
