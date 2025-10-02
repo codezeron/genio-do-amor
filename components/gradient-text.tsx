@@ -1,48 +1,29 @@
-// GradientText.tsx
+import { cn } from '@/utils/cn'
 import MaskedView from '@react-native-masked-view/masked-view'
 import { LinearGradient, LinearGradientProps } from 'expo-linear-gradient'
 import React from 'react'
-import { StyleSheet, Text, TextProps } from 'react-native'
+import { Text, TextProps } from 'react-native'
 
 type GradientTextProps = {
   text: string
   colors: LinearGradientProps['colors']
 } & TextProps
 
-export const GradientText = ({
-  text,
-  colors,
-  style,
-  ...props
-}: GradientTextProps) => {
+export const GradientText = ({ text, colors, ...props }: GradientTextProps) => {
   return (
     <MaskedView
-      style={styles.maskedView}
-      maskElement={
-        <Text style={style} {...props}>
-          {text}
-        </Text>
-      }
+      className="flex flex-row h-fit"
+      maskElement={<Text {...props}>{text}</Text>}
     >
       <LinearGradient
         colors={colors}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
       >
-        <Text style={[style, styles.hiddenText]} {...props}>
+        <Text {...props} className={cn('opacity-0', props.className)}>
           {text}
         </Text>
       </LinearGradient>
     </MaskedView>
   )
 }
-
-const styles = StyleSheet.create({
-  maskedView: {
-    flexDirection: 'row',
-    height: 'auto',
-  },
-  hiddenText: {
-    opacity: 0,
-  },
-})
