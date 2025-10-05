@@ -1,50 +1,28 @@
-# Welcome to your Expo app 👋
+# Guru do amor
+## Trabalho final - Disciplina de React Native
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+O guru do amor é um aplicativo que utiliza inteligência artificial para gerar conselhos personalizados sobre relacionamentos, de forma leve e descontraída.
 
-## Get started
+Atividade desenvolvida para a disciplina de React Native, como parte da pós graduação em dispositivos móveis pela UTFPR. 
 
-1. Install dependencies
+Desenvolvido por:
+- Enzo Yutaka Hashimoto
+- Luiz Ricardo Brumati De Lima
 
-   ```bash
-   npm install
-   ```
 
-2. Start the app
+## Como testar?
 
-   ```bash
-   npx expo start
-   ```
+Para que o aplicativo funcione corretamente, é necessário definir a variável de ambiente `EXPO_PUBLIC_GEMINI_API_KEY` com uma chave de API do Gemini. Crie um arquivo `.env`, semelhante ao `.env.example` e insira uma chave de válida. Em seguida, para instalar as depêndencias e rodar o projeto:
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
 
 ```bash
-npm run reset-project
+npm install
+npm start
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+O app poderá ser testado por meio de um emulador ou dispositivo que tenha o [Expo Go](https://expo.dev/go) instalado.
 
-## Learn more
+## Demonstração:
 
-To learn more about developing your project with Expo, look at the following resources:
+![Demonstração do app](./demo/demo.gif)
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
